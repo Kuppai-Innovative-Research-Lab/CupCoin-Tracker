@@ -1,0 +1,990 @@
+<!-- 
+Author       : Ramaguru Radhakrishnan
+Date Updated : 22.05.2020
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" href="https://1.bp.blogspot.com/-rwTA9Bxswlk/Xt38ei84Q2I/AAAAAAABLec/EbBsUKZGMXs0DS-mdFkcwtgw2aq0JQz8wCK4BGAsYHg/w200-h176/Logo.jpg" type="image/jpg" sizes="16x16">
+    <title>Kuppai Innovative Research Lab - CupCoin Issuer</title>
+    <meta charset="UTF-8"/>
+	<style>
+	body{        
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+	.container{
+        width: 80%;
+        margin: 0 auto; 
+    }
+	.fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: #025E26;
+        padding: 5px 0;
+        color: #2FDB08 ;
+    }
+	.fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    } 
+	.container p{
+		padding-top: 80px;
+        line-height: 20px;
+    }
+	
+	</style>
+</head>
+<body>
+	<div class="fixed-header">
+		<div class="container">
+		<center>
+			<h1> <image src="https://1.bp.blogspot.com/-rwTA9Bxswlk/Xt38ei84Q2I/AAAAAAABLec/EbBsUKZGMXs0DS-mdFkcwtgw2aq0JQz8wCK4BGAsYHg/w200-h176/Logo.jpg" type="image/jpg" width="25px" height="25px">  Kuppai Innovative Research Lab </h1>
+			<h5> (Kuppai, Coimbatore - India) </h5>
+			<h3> <image src="https://1.bp.blogspot.com/-8AvoSJFPHkA/XucwPcqMjrI/AAAAAAABL2A/MNKycXF8dS0wxs-3stURQsFzfwBET-kOQCK4BGAsYHg/s320/CupCoin_Logo.jpg" type="image/jpg" width="35px" height="35px"> CupCoin Issuer</h3>
+		</center>
+		</div>
+	</div>
+        
+	<div class="container">	
+	<p>
+		
+	<hr>
+		<b><u>Issue CupCoin</u></b> <br/><br/>
+		<form>
+			<table>
+			 <tr><td><b>Donor Details</b></td><td></td> </tr>
+			 <tr><td> Name : </td> <td> <input type="text" id="name" name="name"> </td></tr>
+			 <tr><td> Location : </td> <td> <input type="text" id="loc" name="loc"> </td></tr>
+			 <tr><td><b>Drive Details</b></td><td></td> </tr>
+			 <tr><td> Date of Donation: </td> <td> <input type="text" id="date" name="date"> </td></tr>
+			 <tr><td> Drive Name: </td> <td> <input type="text" id="drivename" name="drivename"> </td></tr>
+			 <tr><td> Usable Bra Count : </td> <td> <input type="text" id="ubcount" name="ubcount"> </td></tr>
+			 <tr><td> Damaged Bra Count : </td> <td> <input type="text" id="dbcount" name="dbcount"> </td></tr>
+			 <tr><td> Panties Count : </td> <td> <input type="text" id="pcount" name="pcount"> </td></tr>
+			 <tr><td> Slip Count : </td> <td> <input type="text" id="scount" name="scount"> </td></tr>
+			 <tr><td><b>Coupon Details</b></td><td></td> </tr>
+			 <tr><td> Coupon Issued : </td> <td> <input type="text" id="coupon" name="coupon"> </td></tr>
+			 <tr><td> Coupon Issuer Name: </td> <td> <input type="text" id="cissuer" name="cissuer"> </td></tr>
+			 <tr><td> Token ID: </td> <td> <input type="text" id="tokenID" name="tokenID"> </td></tr>
+			 <tr><td><input type="button" onclick="issue_cupcoin()" value="Issue CupCoin"> </td></tr>
+			</table>
+			
+			<h4> Transaction ID: <a href="https://ropsten.etherscan.io/"><div id="result"></div></a> </h4>
+			
+		</form>
+		<br/><br/>
+	<hr>
+		<b><u>View CupCoin Details</u></b> <br/><br/>
+		CupCoin ID : <input type="text" id="tokenIDr" name="tokenIDr"> <br/><br/>
+		<input type="button" onclick="view_tdetails()" value="View CupCoin Details"> <br/>
+		<h4> Drive Name: <a href=""><div id="drname"></div></a> </h4> <br/>
+		<h4> Donation Date: <a href=""><div id="ddate"></div></a> </h4> <br/>
+		<h4> Donor Name: <a href=""><div id="dname"></div></a> </h4> <br/>
+		<h4> Usable Bra Count: <a href=""><div id="ubra"></div></a> </h4> <br/>
+		<h4> Damaged Bra Count: <a href=""><div id="dbra"></div></a> </h4> <br/>
+		<h4> Panties Count: <a href=""><div id="panties"></div></a> </h4> <br/>
+		<h4> Slips Count: <a href=""><div id="slips"></div></a> </h4> <br/>
+	
+	<hr>
+		<b><u>View Coupon Details</u></b> <br/><br/>
+		CupCoin ID : <input type="text" id="tokenIDr" name="tokenIDr"> <br/><br/>
+		<input type="button" onclick="view_cdetails()" value="View Coupon Details"> <br/>
+		<h4> Drive Name: <a href=""><div id="cdrname"></div></a> </h4> <br/>
+		<h4> Donation Date: <a href=""><div id="cddate"></div></a> </h4> <br/>
+		<h4> Donor Name: <a href=""><div id="cdname"></div></a> </h4> <br/>
+		<h4> Coupon Issuer: <a href=""><div id="ciss"></div></a> </h4> <br/>
+		<h4> Coupon Usage: <a href=""><div id="cuse"></div></a> </h4> <br/>
+		
+	
+	<hr>
+		<b><u>Status</u> </b> <br/><br/>
+		<form>
+			<b>Total Coins</b>				:<div id="tsupply"></div><br/>
+			<b>Total Usable Bras</b>		:<div id="tuBra"></div><br/>
+			<b>Total Damaged Bras</b>		:<div id="tdBra"></div><br/>
+			<b>Total Panties/Briefs</b>		:<div id="tpanties"></div><br/>
+			<b>Total Slips</b>				:<div id="tslips"></div><br/>
+		</form>
+	
+	<hr>
+	
+	</p>	
+	</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.js"></script>
+    <script>	
+	
+	var account;
+	window.addEventListener('load', async () => {
+
+	
+		if (typeof window.ethereum !== 'undefined') { 
+			console.log("MetaMask is Available :) !"); 
+			}
+			
+		// Modern DApp browsers
+		if (window.ethereum) {
+			window.web3 = new Web3(ethereum);
+			
+			// To prevent the page reloading when the MetaMask network changes
+			ethereum.autoRefreshOnNetworkChange = false;
+			
+			// To Capture the account details from MetaMask
+			const accounts = await ethereum.enable();
+			account = accounts[0];
+			
+			}
+		// Legacy DApp browsers
+		else if (window.web3) {
+			//window.web3 = new Web3(web3.currentProvider);
+			window.web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c")); 
+			}
+		// Non-DApp browsers
+		else {
+			console.log('Non-Ethereum browser detected. Please install MetaMask');
+			}
+			
+			loadstatus();
+			
+			});
+			
+			// Smart Contract ABI - Application Binary Interfaces
+				var abi = [
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "admin",
+									"type": "address"
+								}
+							],
+							"name": "addAdmin",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"stateMutability": "nonpayable",
+							"type": "constructor"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "owner",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "approved",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "Approval",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "owner",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "operator",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "bool",
+									"name": "approved",
+									"type": "bool"
+								}
+							],
+							"name": "ApprovalForAll",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "approve",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenID",
+									"type": "uint256"
+								},
+								{
+									"internalType": "string",
+									"name": "usageDetails",
+									"type": "string"
+								}
+							],
+							"name": "couponUsed",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "string",
+									"name": "ui_dname",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "ui_date",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "ui_loc",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "ui_name",
+									"type": "string"
+								},
+								{
+									"internalType": "uint256",
+									"name": "ui_ubcount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "ui_dbcount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "ui_pcount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "ui_scount",
+									"type": "uint256"
+								},
+								{
+									"internalType": "string",
+									"name": "ui_coupon",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "ui_cissuer",
+									"type": "string"
+								},
+								{
+									"internalType": "uint256",
+									"name": "tokenID",
+									"type": "uint256"
+								}
+							],
+							"name": "issue_cupcoin",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "from",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "safeTransferFrom",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "from",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "bytes",
+									"name": "_data",
+									"type": "bytes"
+								}
+							],
+							"name": "safeTransferFrom",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "operator",
+									"type": "address"
+								},
+								{
+									"internalType": "bool",
+									"name": "approved",
+									"type": "bool"
+								}
+							],
+							"name": "setApprovalForAll",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "from",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "to",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "Transfer",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "from",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "transferFrom",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "owner",
+									"type": "address"
+								}
+							],
+							"name": "balanceOf",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "baseURI",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "admin",
+									"type": "address"
+								}
+							],
+							"name": "checkAdmin",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "getApproved",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "owner",
+									"type": "address"
+								},
+								{
+									"internalType": "address",
+									"name": "operator",
+									"type": "address"
+								}
+							],
+							"name": "isApprovedForAll",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "name",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "ownerOf",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "",
+									"type": "address"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "bytes4",
+									"name": "interfaceId",
+									"type": "bytes4"
+								}
+							],
+							"name": "supportsInterface",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "symbol",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "tdamagedBraCount",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "index",
+									"type": "uint256"
+								}
+							],
+							"name": "tokenByIndex",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "owner",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "index",
+									"type": "uint256"
+								}
+							],
+							"name": "tokenOfOwnerByIndex",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "tokenURI",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "totalCollectionCount",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "totalSupply",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "tPantiesCount",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "tSlipCount",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "tusableBraCount",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenID",
+									"type": "uint256"
+								}
+							],
+							"name": "view_couponDetails",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenID",
+									"type": "uint256"
+								}
+							],
+							"name": "view_donationDetails",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								},
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					]
+		
+				//Smart Contract Address
+				var contractaddress = '0xD1D47D1f4e24878856411Ae46be9D1A9321Bd120';
+				
+					// Function to get the status about ERC-721 Token
+			function loadstatus() {
+					
+				console.log("Invoking Smart Contracts - Status");
+						
+				//Instantiate and connect to contract address via ABI
+				var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '3000000'});
+				
+				//call the "totalSupply" function
+				var result = myContract.methods.totalSupply().call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { document.getElementById("tsupply").innerHTML = result; }
+				
+				});
+				
+				//call the "Usable Bra Count" function
+				var result = myContract.methods.tusableBraCount().call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { document.getElementById("tuBra").innerHTML = result; }
+				
+				});
+				
+				//call the "Damaged Bra Count" function
+				var result = myContract.methods.tdamagedBraCount().call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { document.getElementById("tdBra").innerHTML = result; }
+				
+				});
+				
+				//call the "Panties Count" function
+				var result = myContract.methods.tPantiesCount().call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { document.getElementById("tpanties").innerHTML = result; }
+				
+				});
+				
+				//call the "Slip Count" function
+				var result = myContract.methods.tSlipCount().call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { document.getElementById("tslips").innerHTML = result; }
+				
+				});
+					
+			}
+				
+
+			// Function to call the "Issue CupCoin" in Deployed Smart Contract
+			function issue_cupcoin() {
+					
+				console.log("Issue Kuppai CupCoin Issuer");
+						
+				//Instantiate and connect to contract address via ABI
+				var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '3000000'});
+								
+				var name = document.getElementById("name").value;
+				var loc = document.getElementById("loc").value;
+				var ubcount = document.getElementById("ubcount").value;
+				var dbcount = document.getElementById("dbcount").value;
+				var pcount = document.getElementById("pcount").value;
+				var scount = document.getElementById("scount").value;
+				var coupon = document.getElementById("coupon").value;
+				var cissuer = document.getElementById("cissuer").value;
+				var date = document.getElementById("date").value;
+				var drivename = document.getElementById("drivename").value;
+				var tokenID = document.getElementById("tokenID").value;
+				
+				//call the "issue certificate" function
+				var result = myContract.methods.issue_cupcoin(drivename, date, name, loc, ubcount, dbcount, pcount, scount, coupon, cissuer, tokenID).send(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { document.getElementById("result").innerHTML = result; }
+				
+				});
+					
+			}
+			
+			// Function to call the "View Token Details" in Deployed Smart Contract
+			function view_tdetails() {
+					
+				console.log("Getting Kuppai CupCoin Get Details");
+						
+				//Instantiate and connect to contract address via ABI
+				var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '3000000'});
+								
+				var tokenID = document.getElementById("tokenIDr").value;
+				
+				//call the "view token details" function
+				var result = myContract.methods.view_donationDetails(tokenID).call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { 
+					
+					document.getElementById("drname").innerHTML = result[0]; 
+					document.getElementById("ddate").innerHTML = result[1]; 
+					document.getElementById("dname").innerHTML = result[2]; 
+					document.getElementById("ubra").innerHTML = result[3]; 
+					document.getElementById("dbra").innerHTML = result[4]; 
+					document.getElementById("panties").innerHTML = result[5];
+					document.getElementById("slips").innerHTML = result[6]; 					
+					
+					}
+				
+				});
+					
+			}
+			
+			// Function to call the "View Coupon Details" in Deployed Smart Contract
+			function view_cdetails() {
+					
+				console.log("Getting Kuppai CupCoin Get Details");
+						
+				//Instantiate and connect to contract address via ABI
+				var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '3000000'});
+								
+				var tokenID = document.getElementById("tokenIDr").value;
+				
+				//call the "view token details" function
+				var result = myContract.methods.view_couponDetails(tokenID).call(function (err, result) {
+				
+				if (err) { console.log(err); }
+				if (result) { 
+				
+				document.getElementById("cdrname").innerHTML = result[0]; 
+				document.getElementById("cddate").innerHTML = result[1]; 
+				document.getElementById("cdname").innerHTML = result[2]; 
+				document.getElementById("ciss").innerHTML = result[4]; 
+				document.getElementById("cuse").innerHTML = result[6]; 
+					
+				}
+				
+				});
+					
+			}
+	
+    </script>
+	
+	<div class="fixed-footer">
+		<div class="container">
+			<center> <h5> Copyright &copy; 2019-2020 <br/> NamChain - Open Initiative Research Lab and Kuppai Innovative Research Lab <br/> India </h5> </center>
+		</div>
+	</div>
+
+</body>
+</html>
