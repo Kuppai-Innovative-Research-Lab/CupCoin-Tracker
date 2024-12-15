@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Bra Designer</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    #controls {
+      width: 300px;
+      padding: 20px;
+      background: #f7f7f7;
+      border-right: 2px solid #ddd;
+      box-sizing: border-box;
+    }
+    #viewer {
+      flex: 1;
+      height: 100vh;
+      background: #000;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .strap-length-value {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <h2>Customize Your Bra</h2>
+
+    <!-- Customization Controls -->
+    <label for="cup-size">Cup Size</label>
+    <select id="cup-size">
+      <option value="1">A</option>
+      <option value="1.2">B</option>
+      <option value="1.4">C</option>
+      <option value="1.6">D</option>
+      <option value="1.8">DD</option>
+      <option value="2.0">E</option>
+      <option value="2.2">F</option>
+      <option value="2.4">G</option>
+      <option value="2.6">H</option>
+    </select>
+
+    <label for="band-size">Band Size</label>
+    <select id="band-size">
+      <option value="1">Small</option>
+      <option value="1.5">Medium</option>
+      <option value="2">Large</option>
+      <option value="2.5">XL</option>
+    </select>
+
+    <label for="hook-position">Hook Position</label>
+    <select id="hook-position">
+      <option value="front">Front</option>
+      <option value="back">Back</option>
+    </select>
+
+    <label for="hook-levels">Hook Levels</label>
+    <select id="hook-levels">
+      <option value="3x2">3 x 2</option>
+      <option value="2x5">2 x 5</option>
+    </select>
+
+    <label for="strap-length">Strap Length</label>
+	<input type="range" id="strap-length" min="1" max="3" step="0.1" value="1">
+	<div class="strap-length-value">
+	  Strap Length: <span id="strap-length-value">10.0</span> cm
+	</div>
+
+	<script>
+	  // Function to update strap length
+	  function updateStrapLength() {
+		const strapLength = parseFloat(document.getElementById('strap-length').value);
+		document.getElementById('strap-length-value').textContent = (strapLength * 10).toFixed(1); // Update the displayed value in cm (1-3 becomes 10-30)
+		updateBraDesign(); // Update the bra design based on the new strap length
+	  }
+
+	  // Event listener to update strap length dynamically
+	  document.getElementById('strap-length').addEventListener('input', updateStrapLength);
+
+	  // Initialize the strap length value on page load
+	  updateStrapLength();
+	</script>
+
+
+    <label for="color">Color</label>
+    <input type="color" id="color" value="#ff69b4">
+
+    <button id="download">Download Design</button>
+  </div>
+
+  <div id="viewer"></div>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, (window.innerWidth - 300) / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth - 300, window.innerHeight);
+    document.getElementById('viewer').appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    camera.position.set(0, 2, 5);
+    controls.update();
+
+    // Lighting
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(5, 5, 5);
+    scene.add(light);
+
+    const ambientLight = new THREE.AmbientLight(0x404040);
+    scene.add(ambientLight);
+
+    // 3D Bra Model using Primitives
+    const braGroup = new THREE.Group();
+
+    // Cups
+    const cupGeometry = new THREE.SphereGeometry(1, 32, 32, 0, Math.PI);
+    const cupMaterial = new THREE.MeshStandardMaterial({ color: 0xff69b4 });
+    const leftCup = new THREE.Mesh(cupGeometry, cupMaterial);
+    const rightCup = new THREE.Mesh(cupGeometry, cupMaterial);
+    leftCup.position.set(-1.2, 0, 0);
+    rightCup.position.set(1.2, 0, 0);
+
+    // Band
+    const bandGeometry = new THREE.BoxGeometry(3, 0.5, 0.2);
+    const bandMaterial = new THREE.MeshStandardMaterial({ color: 0xff69b4 });
+    const band = new THREE.Mesh(bandGeometry, bandMaterial);
+    band.position.set(0, -0.5, 0);
+
+    // Hooks
+    const hookGeometry = new THREE.BoxGeometry(0.2, 0.1, 0.1);
+    const hookMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const hook = new THREE.Mesh(hookGeometry, hookMaterial);
+    hook.position.set(1.5, -0.5, 0);
+
+    braGroup.add(leftCup, rightCup, band, hook);
+    scene.add(braGroup);
+
+    // Update Function
+    function updateBraDesign() {
+      const cupSize = parseFloat(document.getElementById('cup-size').value);
+      const bandSize = parseFloat(document.getElementById('band-size').value);
+      const hookPosition = document.getElementById('hook-position').value;
+      const hookLevels = document.getElementById('hook-levels').value;
+      const strapLength = parseFloat(document.getElementById('strap-length').value);
+      const color = document.getElementById('color').value;
+
+      // Adjust cup size
+      leftCup.scale.set(cupSize, cupSize, cupSize);
+      rightCup.scale.set(cupSize, cupSize, cupSize);
+
+      // Adjust band size
+      band.scale.set(bandSize, 1, 1);
+
+      // Adjust hook position
+      hook.position.x = hookPosition === 'front' ? -1.5 : 1.5;
+
+      // Adjust hook levels (visualize levels with scaling for simplicity)
+      const [rows, cols] = hookLevels.split('x').map(Number);
+      hook.scale.set(1, rows, cols);
+
+      // Adjust color
+      [leftCup, rightCup, band].forEach((part) => {
+        part.material.color.set(color);
+      });
+
+      // Update strap length display in cm
+      document.getElementById('strap-length-value').textContent = (strapLength * 10).toFixed(1); // Convert slider value to cm (1-3 becomes 10-30)
+    }
+
+    // Add event listeners for inputs
+    document.getElementById('strap-length').addEventListener('input', () => {
+      const strapLength = parseFloat(document.getElementById('strap-length').value);
+      document.getElementById('strap-length-value').textContent = (strapLength * 10).toFixed(1); // Update the displayed value in cm
+      updateBraDesign(); // Update the bra design based on the new strap length
+    });
+
+    document.getElementById('controls').addEventListener('input', updateBraDesign);
+
+    // Download Button Functionality
+    document.getElementById('download').addEventListener('click', () => {
+      renderer.render(scene, camera);
+      const link = document.createElement('a');
+      link.download = 'bra-design.png';
+      link.href = renderer.domElement.toDataURL('image/png');
+      link.click();
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
